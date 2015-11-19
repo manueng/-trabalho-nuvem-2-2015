@@ -1,6 +1,9 @@
 package org.cloudbus.cloudsim.examples;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +24,7 @@ import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.provisioners.BwProvisionerSimple;
 import org.cloudbus.cloudsim.provisioners.PeProvisionerSimple;
 import org.cloudbus.cloudsim.provisioners.RamProvisionerSimple;
-
+import org.cloudbus.cloudsim.Host;
 
 public class simulacao {
 	
@@ -156,7 +159,25 @@ public class simulacao {
 			);
 			return hostList;
 	  }
+	   private static void geraretorno(List<Cloudlet> list){
+		     CloudSim. startSimulation();  
+	         CloudSim.finishSimulation();
+	         DecimalFormat dft = new DecimalFormat("###.##");
+	         CloudSim.startSimulation();
+
+				CloudSim.stopSimulation();
+
+				//Final step: Print results when simulation is over
+				List<Cloudlet> newList = broker.getCloudletReceivedList();
+				printCloudletList(newList);
+	         cloudlet = list.get(i);
+	         System.out.println(dft.format(cloudlet.getFinishTime());	   
+	   }
 	 public static void main(String[] args) throws Exception{
+		 int num_user = 1; // number of cloud users
+		 Calendar calendar = Calendar.getInstance();
+		 boolean trace_flag = false; // mean trace events
+		 CloudSim.init(num_user, calendar, trace_flag);
 		 ArrayList<Vm> vmlist= new ArrayList<Vm>();
 		 String name="xen";
 		 Datacenter datacenter=createDatacenter("xen");
@@ -164,12 +185,20 @@ public class simulacao {
 		 System.out.println(broker);
 		 vmlist=createVm(broker,vmlist,2,3,10,2,256,500,name);
 		 ArrayList<Cloudlet> cloudletlist= new ArrayList<Cloudlet>();
-		 cloudletlist=null;
+		 //cloudletlist=null;
 		 cloudletlist=createcloudlet(cloudletlist,1,10000,10000,100000,1000,1,1);
 		 ArrayList<Pe> pelist= new ArrayList<Pe>();
 		 pelist= createpe( 2,2,pelist);
+		 
+  
+		 
+		 
 		 System.out.println(pelist.get(0));
-		 //List<? extends Host> hostlist=createhost(pelist,1,2,256,1000,2);
+		 ArrayList<Host>  hostlist=   new ArrayList<Host>();
+		 Cloudlet cloudlet;
+		 hostlist= (ArrayList<Host>) createhost(pelist,hostlist, 1,2,256,1000,2);
+         
+         
 		 
 	 }
 	
