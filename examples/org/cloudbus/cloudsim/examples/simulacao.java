@@ -1,4 +1,6 @@
 package org.cloudbus.cloudsim.examples;
+import java.sql.Time;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -159,22 +161,30 @@ public class simulacao {
 			);
 			return hostList;
 	  }
-	   private static void geraretorno(List<Cloudlet> list){
-		     CloudSim. startSimulation();  
-	         CloudSim.finishSimulation();
-	         DecimalFormat dft = new DecimalFormat("###.##");
-	         CloudSim.startSimulation();
-
-				CloudSim.stopSimulation();
-
-				//Final step: Print results when simulation is over
-				List<Cloudlet> newList = broker.getCloudletReceivedList();
-				printCloudletList(newList);
-	         cloudlet = list.get(i);
-	         System.out.println(dft.format(cloudlet.getFinishTime());	   
-	   }
+	   private static  Double geraretorno(DatacenterBroker  broker,List<Cloudlet> list, int  ncloudlets){
+		     Cloudlet cloudlet;
+		     Double sTime=0.00;
+		     Double Time;
+		     Double rTime;
+		     DecimalFormat dft = new DecimalFormat("###.##");
+		     CloudSim.startSimulation(); 
+		     CloudSim.stopSimulation();
+		     List<Cloudlet> newList = broker.getCloudletReceivedList();
+	         //Final step: Print results when simulation is over
+				//List<Cloudlet> newList = broker.getCloudletReceivedList();
+			   cloudlet = newList.get(-1);	
+			   System.out.println(dft.format(cloudlet.getExecStartTime()));			   
+	           System.out.println(dft.format(cloudlet.getFinishTime()));
+	           sTime= cloudlet.getFinishTime()+sTime;
+	           return sTime;
+	   }  
+	     private static  void bindvm( Cloudlet cloudlet, int vmid, int brokerId){
+	    		cloudlet.setUserId(brokerId);
+				cloudlet.setVmId(vmid);
+	     }
 	 public static void main(String[] args) throws Exception{
 		 int num_user = 1; // number of cloud users
+		 Double Time; 
 		 Calendar calendar = Calendar.getInstance();
 		 boolean trace_flag = false; // mean trace events
 		 CloudSim.init(num_user, calendar, trace_flag);
@@ -182,18 +192,15 @@ public class simulacao {
 		 String name="xen";
 		 Datacenter datacenter=createDatacenter("xen");
 		 DatacenterBroker broker= createBroker(name);
-		 System.out.println(broker);
 		 vmlist=createVm(broker,vmlist,2,3,10,2,256,500,name);
 		 ArrayList<Cloudlet> cloudletlist= new ArrayList<Cloudlet>();
-		 //cloudletlist=null;
 		 cloudletlist=createcloudlet(cloudletlist,1,10000,10000,100000,1000,1,1);
+		 Time=geraretorno(broker,cloudletlist,0);
 		 ArrayList<Pe> pelist= new ArrayList<Pe>();
 		 pelist= createpe( 2,2,pelist);
-		 
-  
-		 
-		 
-		 System.out.println(pelist.get(0));
+		 //System.out.println(Time);
+   
+		 //System.out.println(pelist.get(0));
 		 ArrayList<Host>  hostlist=   new ArrayList<Host>();
 		 Cloudlet cloudlet;
 		 hostlist= (ArrayList<Host>) createhost(pelist,hostlist, 1,2,256,1000,2);

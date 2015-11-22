@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="examples"/>
 	<classpathentry kind="src" path="jars"/>
 	<classpathentry kind="src" path="sources"/>
+	<classpathentry excluding="examples/|jars/|sources/" kind="src" path=""/>
 	<classpathentry kind="lib" path="jars/cloudsim-3.0.3-sources.jar"/>
 	<classpathentry kind="lib" path="jars/cloudsim-3.0.3.jar"/>
 	<classpathentry kind="lib" path="jars/cloudsim-examples-3.0.3-sources.jar"/>

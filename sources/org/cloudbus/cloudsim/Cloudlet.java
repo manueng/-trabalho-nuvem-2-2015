@@ -8,6 +8,7 @@
 
 package org.cloudbus.cloudsim;
 
+import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -1159,7 +1160,7 @@ public class Cloudlet {
 	 * @pre $none
 	 * @post $result >= -1
 	 */
-	public double getFinishTime() {
+	public   double getFinishTime() {
 		return finishTime;
 	}
 
